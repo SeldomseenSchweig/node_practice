@@ -3,6 +3,14 @@ const axios = require('axios').default;
 
 filename = process.argv[2]
 
+if (isValidHttpUrl(filename)){
+    webCat(filename)
+}else{
+    cat(filename)
+}
+
+
+
 function cat(path) {
 
     fs.readFile(path, "utf8", (err, data)=> {
@@ -28,4 +36,14 @@ async function webCat(path) {
     
    
 }
-
+function isValidHttpUrl(string) {
+    let url;
+    
+    try {
+      url = new URL(string);
+    } catch (_) {
+      return false;  
+    }
+  
+    return url.protocol === "http:" || url.protocol === "https:";
+  }
