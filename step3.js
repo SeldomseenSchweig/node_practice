@@ -71,6 +71,12 @@ function isValidHttpUrl(string) {
 
   function catWrite(path,filename){
 
+    fs.readFile(path, "utf8", (err, data)=> {
+        if(err){
+            console.log(err)
+            process.kill(1)
+            
+        }
      fs.writeFile(path, data, (err)=>{
         if (err) {
             console.log(err)
@@ -80,9 +86,8 @@ function isValidHttpUrl(string) {
         else{
             console.log("Successful writing!")
         };
-        
      })
-      
+    })
 
 
   }
