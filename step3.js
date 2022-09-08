@@ -5,7 +5,7 @@ const axios = require('axios').default;
 
 
 
-if (process.execArgv[0] !=='--out')
+if (process.argv[2] !=='--out')
 {
     filename = process.argv[2]
     if (isValidHttpUrl(filename)){
@@ -16,8 +16,10 @@ if (process.execArgv[0] !=='--out')
         
     }
 }else{
-    path = process.argv[2]
-    filename = process.argv[3]
+    path = process.argv[3]
+    console.log(path)
+    filename = process.argv[4]
+    console.log(filename)
     if (isValidHttpUrl(filename)){
         webCatWrite(path,filename)
 
