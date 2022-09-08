@@ -40,7 +40,6 @@ function cat(path) {
         }
         console.log(data)
     })
-   return data
 }
 
 
@@ -71,7 +70,7 @@ function isValidHttpUrl(string) {
 
   function catWrite(path,filename){
 
-    fs.readFile(path, "utf8", (err, data)=> {
+    fs.readFile(filename, "utf8", (err, data)=> {
         if(err){
             console.log(err)
             process.kill(1)
