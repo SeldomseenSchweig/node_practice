@@ -9,11 +9,11 @@ if (process.execArgv[0] !=='--out')
 {
     filename = process.argv[2]
     if (isValidHttpUrl(filename)){
-         data = webCat(filename)
-         console.log(data)
+         webCat(filename)
+         
     }else{
-        data = cat(filename)
-        console.log(data)
+        cat(filename)
+        
     }
 }else{
     path = process.argv[2]
@@ -38,7 +38,7 @@ function cat(path) {
             process.kill(1)
             
         }
-        return data
+        console.log(data)
     })
    return data
 }
@@ -48,7 +48,7 @@ async function webCat(path) {
     try {
         const response = await axios.get(path);
         data= response.data;
-        return data
+        console.log(data)
       } catch (error) {
         console.error(error);
       }
@@ -70,7 +70,7 @@ function isValidHttpUrl(string) {
 
 
   function catWrite(path,filename){
-     data = cat(filename)
+
      fs.writeFile(path, data, (err)=>{
         if (err) {
             console.log(err)
@@ -88,7 +88,8 @@ function isValidHttpUrl(string) {
   }
 
   async function webCatWrite(path, filename ) {
-    data = webCat(filename)
+    const response = await axios.get(filename);
+    data= response.data;
     fs.writeFile(path, data, (err)=>{
         if (err) {
             console.log(err)
